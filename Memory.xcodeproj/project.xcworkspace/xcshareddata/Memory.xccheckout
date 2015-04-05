@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3374A6F2-D3A3-441E-B7E1-3B59224718D2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Memory</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0A827293-6DE7-4141-A58E-604FB79EC536</key>
+		<string>https://github.com/RadwaHassan/iOSCardGame.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Memory.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0A827293-6DE7-4141-A58E-604FB79EC536</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RadwaHassan/iOSCardGame.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0A827293-6DE7-4141-A58E-604FB79EC536</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0A827293-6DE7-4141-A58E-604FB79EC536</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOSCardGame</string>
+		</dict>
+	</array>
+</dict>
+</plist>

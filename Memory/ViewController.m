@@ -57,7 +57,7 @@ NSInteger firstIndex ;
         
     NSInteger index = [sender tag];
     NSLog(@"%ld",(long)index);
-    NSLog(@"%ld",[cardsImages count]);
+    NSLog(@"%ld",(unsigned long)[cardsImages count]);
         
     // clickedButton the button that has been clicked
     UIButton *clickedButton=[cardsButtonsArray objectAtIndex:index-1];
@@ -77,7 +77,7 @@ NSInteger firstIndex ;
         if(firstIndex != index) {
             
             NSLog(@"%ld",(long)index);
-            NSLog(@"%ld",[cardsImages count]);
+            NSLog(@"%ld",(unsigned long)[cardsImages count]);
             
             
             secondClick=[cardsImages objectAtIndex:index-1];
