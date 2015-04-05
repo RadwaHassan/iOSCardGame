@@ -118,6 +118,7 @@ NSInteger firstIndex ;
             
             //make the two buttons unclickable and transparent
             secondClickButton.userInteractionEnabled = NO;
+            //make the button transparent
             secondClickButton.alpha=0.5;
             firstClickButton.userInteractionEnabled = NO;
             firstClickButton.alpha=0.5;
