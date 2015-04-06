@@ -13,7 +13,7 @@
 @end
 
 @implementation ProfileViewController
-@synthesize profileImage,profileNameLabel,profileNameTxtField,changeNameBtn1,changeImageBtn;
+@synthesize profileImage,profileNameLabel,profileNameTxtField,changeNameBtn1,changeImageBtn,profileSaveBtn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,7 +49,7 @@
         self.profileNameTxtField.hidden = NO;
         [self.changeNameBtn1 setTitle:@"Save Name" forState:UIControlStateNormal];
     }else if ([[[sender titleLabel]text] isEqual:@"Save Name"]){
-        [profileNameTxtField setText:[profileNameTxtField text]];
+        [profileNameLabel setText:[profileNameTxtField text]];
         self.profileNameLabel.hidden = NO;
         self.profileNameTxtField.enabled = NO;
         self.profileNameTxtField.hidden = YES;
@@ -60,5 +60,25 @@
 
 -(void)changeImagePressed:(id)sender{
     
+    //To go to the photo library
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentModalViewController:imagePickerController animated:YES];
 }
+
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    //write your logic here
+    [picker dismissModalViewControllerAnimated:YES];
+    [profileImage setImage:image];
+}
+
+-(void)saveProfile:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+
 @end

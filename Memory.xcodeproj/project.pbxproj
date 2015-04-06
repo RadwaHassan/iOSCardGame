@@ -10,6 +10,7 @@
 		D192049F1AD17EF600557E6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D192049E1AD17EF600557E6C /* Default-568h@2x.png */; };
 		D19204B61AD189A900557E6C /* 10-01.png in Resources */ = {isa = PBXBuildFile; fileRef = D19204B51AD189A900557E6C /* 10-01.png */; };
 		D19506851AD1CA7C007E41ED /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D19506841AD1CA7C007E41ED /* ProfileViewController.m */; };
+		D19506871AD1D9BD007E41ED /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = D19506861AD1D9BD007E41ED /* user.png */; };
 		DD207A021ACF096A00645721 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = DD2079F91ACF096A00645721 /* 11.png */; };
 		DD207A031ACF096A00645721 /* 22.png in Resources */ = {isa = PBXBuildFile; fileRef = DD2079FA1ACF096A00645721 /* 22.png */; };
 		DD207A041ACF096A00645721 /* 33.png in Resources */ = {isa = PBXBuildFile; fileRef = DD2079FB1ACF096A00645721 /* 33.png */; };
@@ -46,6 +47,7 @@
 		D19204B51AD189A900557E6C /* 10-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "10-01.png"; path = "images/10-01.png"; sourceTree = SOURCE_ROOT; };
 		D19506831AD1CA7C007E41ED /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		D19506841AD1CA7C007E41ED /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		D19506861AD1D9BD007E41ED /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		DD2079F91ACF096A00645721 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 11.png; path = images/11.png; sourceTree = SOURCE_ROOT; };
 		DD2079FA1ACF096A00645721 /* 22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 22.png; path = images/22.png; sourceTree = SOURCE_ROOT; };
 		DD2079FB1ACF096A00645721 /* 33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 33.png; path = images/33.png; sourceTree = SOURCE_ROOT; };
@@ -113,13 +115,13 @@
 			name = "Home screen";
 			sourceTree = "<group>";
 		};
-		DD78C3101AD00482007594B3 /* game view */ = {
+		DD78C3101AD00482007594B3 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
 				DD841DA61AC97B8300F7981D /* ViewController.m */,
 				DD841DA51AC97B8300F7981D /* ViewController.h */,
 			);
-			name = "game view";
+			name = "Game View";
 			sourceTree = "<group>";
 		};
 		DD78C3111AD00BB3007594B3 /* Setting view */ = {
@@ -140,13 +142,13 @@
 			name = "Ranking view";
 			sourceTree = "<group>";
 		};
-		DD78C3191AD0152F007594B3 /* SignI n and Sign up */ = {
+		DD78C3191AD0152F007594B3 /* SignIn and SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				DD78C31A1AD0155D007594B3 /* SignInAndSignUpViewController.h */,
 				DD78C31B1AD0155D007594B3 /* SignInAndSignUpViewController.m */,
 			);
-			name = "SignI n and Sign up";
+			name = "SignIn and SignUp";
 			sourceTree = "<group>";
 		};
 		DD841D921AC97B8300F7981D = {
@@ -172,10 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				D19506821AD1C9F1007E41ED /* Profile View */,
-				DD78C3191AD0152F007594B3 /* SignI n and Sign up */,
+				DD78C3191AD0152F007594B3 /* SignIn and SignUp */,
 				DD78C3151AD0106B007594B3 /* Ranking view */,
 				DD78C3111AD00BB3007594B3 /* Setting view */,
-				DD78C3101AD00482007594B3 /* game view */,
+				DD78C3101AD00482007594B3 /* Game View */,
 				DD2F8D651ACFBCEC004CDF4D /* Home screen */,
 				DDFF80BA1AC9E87400DABDC7 /* images */,
 				DD841DA21AC97B8300F7981D /* AppDelegate.h */,
@@ -216,6 +218,7 @@
 		DDFF80BA1AC9E87400DABDC7 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D19506861AD1D9BD007E41ED /* user.png */,
 				D19204B51AD189A900557E6C /* 10-01.png */,
 				DD2079F91ACF096A00645721 /* 11.png */,
 				DD2079FA1ACF096A00645721 /* 22.png */,
@@ -314,6 +317,7 @@
 				DD207A071ACF096A00645721 /* 66.png in Resources */,
 				DD207A031ACF096A00645721 /* 22.png in Resources */,
 				DD207A041ACF096A00645721 /* 33.png in Resources */,
+				D19506871AD1D9BD007E41ED /* user.png in Resources */,
 				DD207A061ACF096A00645721 /* 55.png in Resources */,
 				D19204B61AD189A900557E6C /* 10-01.png in Resources */,
 				DD207A091ACF096A00645721 /* 88.png in Resources */,

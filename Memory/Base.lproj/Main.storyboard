@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Profile View Controller-->
+        <!--Profile View Controller - Profile-->
         <scene sceneID="eAz-oN-9iR">
             <objects>
                 <viewController id="odC-HC-05w" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -32,23 +32,23 @@
                                     <action selector="changeImagePressed:" destination="odC-HC-05w" eventType="touchUpInside" id="cwI-h1-fzM"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfm-uE-K66">
-                                <rect key="frame" x="71" y="94" width="186" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hfm-uE-K66">
+                                <rect key="frame" x="87" y="94" width="149" height="128"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH6-Nl-cfu">
-                                <rect key="frame" x="110" y="338" width="42" height="21"/>
+                                <rect key="frame" x="110" y="338" width="170" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yTV-1F-syV">
-                                <rect key="frame" x="110" y="334" width="139" height="30"/>
+                                <rect key="frame" x="110" y="334" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ub-Lj-JcE">
-                                <rect key="frame" x="110" y="426" width="98" height="30"/>
+                                <rect key="frame" x="112" y="393" width="98" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Change Name">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,13 +60,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="MzE-IG-soX"/>
+                    <navigationItem key="navigationItem" title="Profile" id="MzE-IG-soX">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="jBv-G8-SJn">
+                            <connections>
+                                <action selector="saveProfile:" destination="odC-HC-05w" id="qCY-KL-zPf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="changeImageBtn" destination="ITl-vC-h4c" id="5SF-pd-NeP"/>
                         <outlet property="changeNameBtn1" destination="3ub-Lj-JcE" id="Dq9-Ti-h7D"/>
                         <outlet property="profileImage" destination="Hfm-uE-K66" id="pDX-wO-GJY"/>
                         <outlet property="profileNameLabel" destination="fH6-Nl-cfu" id="mPb-Uh-qHR"/>
                         <outlet property="profileNameTxtField" destination="yTV-1F-syV" id="IL7-C9-rDp"/>
+                        <outlet property="profileSaveBtn" destination="jBv-G8-SJn" id="too-Sa-sUa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZb-GF-mwI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -375,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LaJ-sf-nRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1092" y="418"/>
+            <point key="canvasLocation" x="1110" y="-2"/>
         </scene>
         <!--Sign In And Sign Up View Controller-->
         <scene sceneID="Npf-gk-xPn">
@@ -494,6 +501,7 @@
     </scenes>
     <resources>
         <image name="back.png" width="426" height="426"/>
+        <image name="user.png" width="336" height="336"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

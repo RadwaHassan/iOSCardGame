@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property IBOutlet UIImageView *profileImage;
 @property IBOutlet UILabel *profileNameLabel;
 @property IBOutlet UITextField *profileNameTxtField;
 @property IBOutlet UIButton *changeNameBtn1;
 @property IBOutlet UIButton *changeImageBtn;
+@property IBOutlet UIBarButtonItem *profileSaveBtn;
+
 -(IBAction)changeNamePressed:(id)sender;
 -(IBAction)changeImagePressed:(id)sender;
+-(IBAction)saveProfile:(id)sender;
 
 @end
