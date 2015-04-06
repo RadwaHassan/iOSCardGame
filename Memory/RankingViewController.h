@@ -11,5 +11,5 @@
 @interface RankingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView2;
-
+//test
 @end
