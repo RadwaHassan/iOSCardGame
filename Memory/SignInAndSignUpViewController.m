@@ -31,7 +31,7 @@
     [signupButton setBackgroundColor:[UIColor purpleColor]];
     signinButton.layer.cornerRadius = 10.0;
     signupButton.layer.cornerRadius = 10.0;
-    
+    //sarah
     [username setBorderStyle:UITextBorderStyleNone];
     username.layer.cornerRadius = 10.0;
     username.layer.borderColor = [UIColor purpleColor].CGColor;
