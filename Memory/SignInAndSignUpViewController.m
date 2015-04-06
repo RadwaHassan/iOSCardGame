@@ -12,7 +12,11 @@
 
 @end
 
-@implementation SignInAndSignUpViewController
+@implementation SignInAndSignUpViewController{
+    NSString *myUsername;
+    NSString *myPassword;
+    NSUserDefaults *defaults;
+}
 
 @synthesize signinButton , signupButton , username ,password;
 
@@ -21,6 +25,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     [signinButton setBackgroundColor:[UIColor purpleColor]];
     [signupButton setBackgroundColor:[UIColor purpleColor]];
     signinButton.layer.cornerRadius = 10.0;
@@ -36,6 +42,16 @@
     password.layer.borderColor = [UIColor purpleColor].CGColor;
     password.layer.borderWidth = 1.0;
     
+    //if defaults still have values and not logged out
+    if (defaults!=nil) {
+  
+    if (([myUsername isEqual:[defaults valueForKey:@"phone"]])&&([myPassword isEqual:[defaults valueForKey:@"password"]])) {
+        
+        
+        
+    }}
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +64,16 @@
 }
 -(IBAction)signUpButton:(id)sender{
     
+    
+    //save data in NSDefault after SignUp
+    myUsername = [username text];
+    [defaults setValue:myUsername forKey:@"username"];
+    
+    myPassword = [password text];
+    [defaults setValue:myPassword forKey:@"password"];
+    
 }
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
