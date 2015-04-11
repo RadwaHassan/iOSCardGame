@@ -14,7 +14,7 @@
 
 @implementation HomeScreenViewController
 
-@synthesize profileIconbtn,homeName;
+@synthesize profileIconbtn,homeName,userName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    NSLog(userName);
+    self.homeName.text=userName;
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa2.jpg"]]];
+
     [self.navigationController setTitle:@"Home"];
     
 }

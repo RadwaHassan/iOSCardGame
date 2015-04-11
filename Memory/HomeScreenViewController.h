@@ -12,5 +12,5 @@
 
 @property IBOutlet UIBarButtonItem *profileIconbtn;
 @property IBOutlet UILabel *homeName;
-
+@property NSString *userName;
 @end

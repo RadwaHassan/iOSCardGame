@@ -13,7 +13,7 @@
 @end
 
 @implementation SettingViewController
-
+@synthesize soundSwitch;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +34,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)soundSwitch:(id)sender{
+    if (soundSwitch.on) {
+        //sound enabled
+        printf("enabled");
+        
+    }else{
+        //sound disabled
+        printf("disabled");
+    }
+    printf("not here or here");
+}
 
 /*
 #pragma mark - Navigation

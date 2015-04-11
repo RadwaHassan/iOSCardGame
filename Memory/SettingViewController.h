@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingViewController : UIViewController
+@property IBOutlet UISwitch *soundSwitch;
+-(IBAction)soundSwitch:(id)sender;
 
 @end

@@ -7,18 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import <Social/Social.h>
 
 @interface ViewController : UIViewController
+
+@property (strong, nonatomic) AVAudioPlayer *player;
+
 @property ( nonatomic,strong) IBOutletCollection(UIButton) NSArray *cardsButtonsArray;
 
 @property (strong,nonatomic) NSMutableArray *cardsImages;
-
 @property IBOutlet UILabel *scoreLable;
 @property IBOutlet UILabel *timerLabel;
 @property NSInteger score;
 @property NSInteger seconds;
+@property NSInteger cardMatchedCounter;
 
-@property NSTimer *timer; //ADD THIS!!
+@property NSTimer *timer;
 @property NSString *firstClick;
 @property UIButton *firstClickButton;
 
@@ -28,10 +34,13 @@
 
 
 @property BOOL touchOK;
+@property SLComposeViewController *mySLComposerSheet;
 
 
 
 -(IBAction)cardClicked:(id)sender;
+-(IBAction)pauseButtonClicked:(id)sender;
+
 - (void)setupGame;
 - (void)subtractTime;
 

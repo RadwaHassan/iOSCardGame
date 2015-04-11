@@ -17,6 +17,8 @@
 {
     
     NSArray *data;
+    NSArray *score;
+
 }
 
 
@@ -24,11 +26,11 @@
 {
     [super viewDidLoad];
     // self.tableView2.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"back3.jpg"]];
-    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa2.jpg"]]];
+
     data = [NSArray arrayWithObjects:@"Sarah Aabed",@"Radwa Hassan",@"Maram Osama",@"Marian",nil];
     
-    
-    
+    score= [NSArray arrayWithObjects:@1234,@345554,@23323,@2332434,@43434,@45345,@122,@22,nil];
     
 }
 
@@ -50,16 +52,20 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
     }
     if(indexPath.row==0){
         cell.textLabel.text = [data objectAtIndex:indexPath.row];
+        NSString *str = [NSString stringWithFormat:@"%@" , [score objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text=str;
         cell.imageView.image=[UIImage imageNamed:@"star.png"];
     }
     else
     {
         cell.textLabel.text = [data objectAtIndex:indexPath.row];
-        cell.imageView.image=[UIImage imageNamed:@"badge.png"];
+        NSString *str = [NSString stringWithFormat:@"%@" , [score objectAtIndex:indexPath.row]];
+        cell.detailTextLabel.text=str;
+        cell.imageView.image=[UIImage imageNamed:@"star.png"];
     }
     
     return cell;

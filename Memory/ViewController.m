@@ -10,7 +10,6 @@
 
 @interface ViewController (){
     NSString *backCard;
-    
 }
 
 @end
@@ -30,7 +29,7 @@ NSInteger *currentSecond = 0;
 @synthesize score;
 @synthesize timerLabel;
 @synthesize scoreLable;
-
+@synthesize cardMatchedCounter;
 @synthesize touchOK;
 
 NSInteger firstIndex ;
@@ -39,21 +38,83 @@ NSInteger firstIndex ;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
    
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"10-01.png"] ]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa2.jpg"]]];
     self.modalPresentationStyle = UIModalPresentationCurrentContext;
-
-   
-   // self.view.opaque=NO;
     [self setupGame];
     
 }
 
 
+// set up the game
+- (void)setupGame{
+    backCard= @"face.png";
+    seconds = 0;
+    score = 0;
+    cardMatchedCounter=0;
+    self.touchOK = YES;
+    
+    cardsImages = [[NSMutableArray alloc] initWithObjects:
+                   @"1.png",
+                   @"2.png",
+                   @"3.png",
+                   @"4.png",
+                   @"5.png",
+                   @"6.png",
+                   @"7.png",
+                   @"8.png",
+                   @"1.png",
+                   @"2.png",
+                   @"3.png",
+                   @"4.png",
+                   @"5.png",
+                   @"6.png",
+                   @"7.png",
+                   @"8.png",
+                   nil];
+    
+    timerLabel.text = [NSString stringWithFormat:@"Time: %i",seconds];
+    scoreLable.text = [NSString stringWithFormat:@"Score: %i",score];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(subtractTime) userInfo:nil repeats:YES];
+    self.flipAllCardsBack;
+    
+    //make the images in the cardsImages array random
+    NSUInteger count = [cardsImages count];
+    
+    for (NSUInteger i = 0; i < count; ++i) {
+        // Select a random element between i and end of array to swap with.
+        int nElements = count - i;
+        int n = (arc4random() % nElements) + i;
+        [cardsImages exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+}
 
 
 - (IBAction)cardClicked:(id)sender{
     
     if (touchOK) {
+        
+        //make sound effect on click
+        
+        //**** uncomment this part for xcode 5
+//        NSString *pathToMySound = [[NSBundle mainBundle] pathForResource:@"multimedia_button_click" ofType:@"mp3"];
+//        SystemSoundID soundID;
+//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL fileURLWithPath: pathToMySound]), &soundID);
+//        AudioServicesPlaySystemSound(soundID);
+
+        
+        
+        //**** comment this part for xcode 5
+        NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                   [[NSBundle mainBundle] resourcePath], @"multimedia_button_click"];
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        
+        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                         error:nil];
+        _player.numberOfLoops = 0;
+        
+        [_player play];
+        
         
     NSInteger index = [sender tag];
     NSLog(@"%ld",(long)index);
@@ -113,8 +174,30 @@ NSInteger firstIndex ;
             //the two buttons are matched
         else{
             
+            //make sound effect on click when matched
             
+            //****uncomment this part for xcode 5
+            
+//            NSString *pathToMySound = [[NSBundle mainBundle] pathForResource:@"matched" ofType:@"mp3"];
+//            SystemSoundID soundID;
+//            AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL fileURLWithPath: pathToMySound]), &soundID);
+//            AudioServicesPlaySystemSound(soundID);
+//            
+            
+            
+            //**** comment this part for xcode 5
+            NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                       [[NSBundle mainBundle] resourcePath], @"matched"];
+            NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+            
+            _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                             error:nil];
+            _player.numberOfLoops = 0;
+            
+            [_player play];
             touchOK=YES;
+            
+            cardMatchedCounter++;
             
             //make the two buttons unclickable and transparent
             secondClickButton.userInteractionEnabled = NO;
@@ -124,26 +207,26 @@ NSInteger firstIndex ;
             firstClickButton.alpha=0.5;
             
             //increase the score
-            score++;
+            score=score+100;
             
             //if the user finish the game before
             //time is up
-            if (score == 8) {
+            if (cardMatchedCounter == 8) {
                 
                 UIAlertView *winAlert = [[UIAlertView alloc]
                                               initWithTitle:@"Excellent"
                                               message:@"You win"
                                               delegate:self
-                                              cancelButtonTitle:@"Play Again"
-                                              otherButtonTitles:@"Quit",nil];
+                                              cancelButtonTitle:@"Share your score"
+                                              otherButtonTitles:@"Home",nil];
                 [winAlert show];
                 [timer invalidate];
                 
             }
             
             
-            printf("count = %d",score);
-            scoreLable.text = [NSString stringWithFormat:@"Score: %i",score];
+            printf("count = %ld",(long)score);
+            scoreLable.text = [NSString stringWithFormat:@"Score: %li",(long)score];
             
         }
         //reset the first button reference
@@ -171,6 +254,7 @@ NSInteger firstIndex ;
     
     }
 }
+
 
 //flip the two cards back if the two cards are not match
 - (void) flipCardsBack{
@@ -212,67 +296,35 @@ NSInteger firstIndex ;
      touchOK=YES;
 }
 
-// set up the game
-- (void)setupGame{
-    backCard= @"back.png";
-    seconds = 60;
-    score = 0;
-    
-    self.touchOK = YES;
-    
-    cardsImages = [[NSMutableArray alloc] initWithObjects:
-                   @"11.png",
-                   @"22.png",
-                   @"33.png",
-                   @"44.png",
-                   @"55.png",
-                   @"66.png",
-                   @"77.png",
-                   @"88.png",
-                   @"11.png",
-                   @"22.png",
-                   @"33.png",
-                   @"44.png",
-                   @"55.png",
-                   @"66.png",
-                   @"77.png",
-                   @"88.png",
-                   nil];
-    
-
-    timerLabel.text = [NSString stringWithFormat:@"Time: %i",seconds];
-    scoreLable.text = [NSString stringWithFormat:@"Score: %i",score];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(subtractTime) userInfo:nil repeats:YES];
-    self.flipAllCardsBack;
-    
-    //make the images in the cardsImages array random
-    NSUInteger count = [cardsImages count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        // Select a random element between i and end of array to swap with.
-        int nElements = count - i;
-        int n = (arc4random() % nElements) + i;
-        [cardsImages exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
-}
 
 - (void)subtractTime{
-    seconds--;
-    timerLabel.text = [NSString stringWithFormat:@"Time: %i",seconds];
-    if(seconds == 0){
+    seconds++;
+    if (cardMatchedCounter>0) {
+        score=score-2;
+
+    }
+    timerLabel.text = [NSString stringWithFormat:@"Time: %li",(long)seconds];
+    scoreLable.text = [NSString stringWithFormat:@"Score: %li",(long)score];
+    if(seconds == 60){
         [timer invalidate];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Time is up!" message:[NSString stringWithFormat:@"You scored %i points",score] delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Time is up!" message:[NSString stringWithFormat:@"You scored %i points",score] delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Home",nil];
         [alert show];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-   // ViewController *new =[ViewController new];
-    // [self.view setNeedsDisplay];
+   
     switch (buttonIndex) {
         case 0:
-            [self setupGame];
+            if ([alertView.title isEqualToString:@"Excellent"]) {
+                [self shareOnFaceBook];
+
+            }
+            else{
+                [self setupGame];
+
+            }
             break;
         case 1:
             [self.navigationController popViewControllerAnimated:YES];
@@ -280,12 +332,56 @@ NSInteger firstIndex ;
         default:
             break;
     }
-    //[self viewWillAppear:YES];
     
 }
+
+-(void) shareOnFaceBook{
+    if(![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])  {
+        NSLog(@"log output of your choice here");
+    }
+    // Facebook may not be available but the SLComposeViewController will handle the error for us.
+    self.mySLComposerSheet = [[SLComposeViewController alloc] init];
+    self.mySLComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    
+    NSString *postMessage=[NSString stringWithFormat:@"You scored %ld points in %ld Second \n You can download MemoCard From www.Team5.com",(long)score,(long)seconds];
+    [self.mySLComposerSheet setInitialText:postMessage];
+    
+    [self presentViewController:self.mySLComposerSheet animated:YES completion:nil];
+    
+    [self.mySLComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        NSString *output;
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                output = @"Action Cancelled";
+                [self.navigationController popViewControllerAnimated:YES];
+
+                break;
+            case SLComposeViewControllerResultDone:
+                output = @"Post Successfull";
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
+            default:
+                break;
+        }
+        if (![output isEqualToString:@"Action Cancelled"]) {
+            // Only alert if the post was a success. Or not! Up to you.
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:output delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }];
+
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [timer invalidate];
+
+}
+
 
 @end
