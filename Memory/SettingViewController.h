@@ -11,5 +11,7 @@
 @interface SettingViewController : UIViewController
 @property IBOutlet UISwitch *soundSwitch;
 -(IBAction)soundSwitch:(id)sender;
+@property IBOutlet UISwitch *bkgndSoundSwitch;
 
+-(IBAction)bckgndSoundSwitch:(id)sender;
 @end

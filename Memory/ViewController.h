@@ -31,6 +31,7 @@
 @property NSString *secondClick;
 @property UIButton *secondClickButton;
 
+@property NSString *userName;
 
 
 @property BOOL touchOK;

@@ -15,9 +15,9 @@
 @implementation SignInAndSignUpViewController{
     NSString *myUsername;
     NSString *myPassword;
-    NSUserDefaults *defaults;
     NSNumber *check;
     id senderBtn;
+    NSUserDefaults *defaults;
 }
 
 @synthesize signinButton , signupButton , username ,password;
@@ -26,10 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa1.jpg"]]];
-    // Do any additional setup after loading the view, typically from a nib.
     defaults = [NSUserDefaults standardUserDefaults];
+
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa1.jpg"]]];
+    //[self.navigationController.navigationBar setTintColor:[UIColor blueColor]];
+   // self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:194.0f/255.0f green:235.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+    
+   
+
+    // Do any additional setup after loading the view, typically from a nib.
     
     [signinButton setBackgroundColor:[UIColor purpleColor]];
     //[signupButton setBackgroundColor:[UIColor purpleColor]];
@@ -47,15 +52,17 @@
     password.layer.borderWidth = 1.0;
     
     //if defaults still have values and not logged out
-    if (defaults!=nil) {
-  
-    if (([myUsername isEqual:[defaults valueForKey:@"phone"]])&&([myPassword isEqual:[defaults valueForKey:@"password"]])) {
-        
-        
-        
-    }}
+//    if (defaults!=nil) {
+//  
+//    if (([myUsername isEqual:[defaults valueForKey:@"phone"]])&&([myPassword isEqual:[defaults valueForKey:@"password"]])) {
+//        
+//        
+//        
+//    }}
+   // [[self.navigationController.navigationBar appearance] setBarTintColor:[UIColor blueColor]];
+   // self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:117/255.0f green:4/255.0f blue:32/255.0f alpha:1];
+   // [[UINavigationBar appearance] setBarTintColor:[UIColor greenColor]];
 
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,14 +81,13 @@
 
             NSString *password=myPassword;
 
-            NSString *final=[NSString stringWithFormat:@"http://192.168.1.10:8084/IosCardGameServer/Login?email=%@&password=%@",userName,password];
+            NSString *final=[NSString stringWithFormat:@"http://10.145.17.224:8084/IosCardGameServer/Login?email=%@&password=%@",userName,password];
             NSURL *url=[[NSURL alloc]initWithString:final];
             NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
             NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
             [connection start];
-
     
-    
+    //[self performSegueWithIdentifier:@"logInSuccess" sender:senderBtn];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -100,6 +106,12 @@
     if([state intValue] == 1 ){
         NSNumber *score=[dic objectForKey:@"Score"];
            [self performSegueWithIdentifier:@"logInSuccess" sender:senderBtn];
+        
+         myUsername = [username text];
+        [defaults setValue:myUsername forKey:@"username"];
+        
+        myPassword = [password text];
+        [defaults setValue:myPassword forKey:@"password"];
     }
     else{
         [username setText:@""];
@@ -120,11 +132,7 @@
     
     if ([[segue identifier] isEqualToString:@"logInSuccess"]) {
      
-            myUsername = [username text];
-            [defaults setValue:myUsername forKey:@"username"];
-            
-            myPassword = [password text];
-            [defaults setValue:myPassword forKey:@"password"];
+           
             
             
             HomeScreenViewController *homeScreen = [segue destinationViewController];

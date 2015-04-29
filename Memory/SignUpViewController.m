@@ -8,7 +8,11 @@
 
 #import "SignUpViewController.h"
 
-@interface SignUpViewController ()
+@interface SignUpViewController (){
+    NSUserDefaults *defaults;
+    NSString *myUsername;
+    NSString  *myPassword;
+}
 
 @end
 
@@ -27,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    defaults = [NSUserDefaults standardUserDefaults];
+
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa2.jpg"]]];
 
@@ -54,30 +60,31 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)signupPressed:(id)sender{
-    NSString *str1=[signupUsername text];
-    NSString *str2=[signupEmail text];
-    NSString *str3=[signupPassword text];
-    
-    //http://localhost:8084/IosWebDemo/SignUP?name=moh&email=moh&password=ss virtual cann't use local host as ip
-    
-    
-    //printf("++++%s" , [str UTF8String]);
-    NSString *final=[NSString stringWithFormat:@"http://192.168.1.13:8084/IosCardGameServer/SignUP?email=%@&name=%@&password=%@",str1,str2,str3];
-    
-    NSURL *url=[[NSURL alloc]initWithString:final];
-    
-    
-    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
-    
-    
-    NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
-    [connection start];
-    
-    //redirect to signIn view when signUp is successful
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
+//-(void)signupPressed:(id)sender{
+//    NSString *str1=[signupUsername text];
+//    NSString *str2=[signupEmail text];
+//    NSString *str3=[signupPassword text];
+//    
+//    //http://localhost:8084/IosWebDemo/SignUP?name=moh&email=moh&password=ss virtual cann't use local host as ip
+//    
+//    
+//    //printf("++++%s" , [str UTF8String]);
+//    NSString *final=[NSString stringWithFormat:@"http://192.168.1.13:8084/IosCardGameServer/SignUP?email=%@&name=%@&password=%@",str1,str2,str3];
+//    
+//    NSURL *url=[[NSURL alloc]initWithString:final];
+//    
+//    
+//    NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
+//    
+//    
+//    NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
+//    [connection start];
+//    
+//    
+//    //redirect to signIn view when signUp is successful
+//    [self.navigationController popViewControllerAnimated:YES];
+//    
+//}
 
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
@@ -94,6 +101,11 @@
        // [scoreLabel setText:[NSString stringWithFormat:@"%@", score]];
         UIAlertView *alertLogin=[[UIAlertView alloc]initWithTitle:@"Status" message:@"Logined successfully !" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Ok", nil];
         [alertLogin show];
+      myUsername = [signupUsername text];
+        [defaults setValue:myUsername forKey:@"username"];
+        
+       myPassword = [signupPassword text];
+        [defaults setValue:myPassword forKey:@"password"];
         
     }
     else{
@@ -110,30 +122,27 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([[segue identifier] isEqualToString:@"login"]) {
-        NSLog(@"in if");
-        //        id object = [_objects objectAtIndex:_ipth.row];
-        //        [[segue destinationViewController] setDetailItem:object];
-        //save data in NSDefault after SignUp
-//        myUsername = [username text];
-//        [defaults setValue:myUsername forKey:@"username"];
-//        
-//        myPassword = [password text];
-//        [defaults setValue:myPassword forKey:@"password"];
-//        
-//        NSString *str1=myUsername ;
-//        NSString *str2=myPassword;
-//        NSString *final=[NSString stringWithFormat:@"http://10.145.10.162:8084/IosCardGameServer/Login?email=%@&password=%@",str1,str2];
-//        NSURL *url=[[NSURL alloc]initWithString:final];
-//        NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
-//        NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
-//        [connection start];
-//        
-//        
-//        HomeScreenViewController *homeScreen = [segue destinationViewController];
-//        homeScreen.userName=myUsername;
+    
+        NSString *str1=[signupUsername text];
+        NSString *str2=[signupEmail text];
+        NSString *str3=[signupPassword text];
+        
+        //http://localhost:8084/IosWebDemo/SignUP?name=moh&email=moh&password=ss virtual cann't use local host as ip
         
         
-    }
+        //printf("++++%s" , [str UTF8String]);
+        NSString *final=[NSString stringWithFormat:@"http://10.145.17.224:8084/IosCardGameServer/SignUP?email=%@&name=%@&password=%@",str1,str2,str3];
+        
+        NSURL *url=[[NSURL alloc]initWithString:final];
+        
+        
+        NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
+        
+        
+        NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
+        [connection start];
+        
+        
+    
 }
 @end

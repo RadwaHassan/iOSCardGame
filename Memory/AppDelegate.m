@@ -18,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+//     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"green-02.png"] forBarMetrics:UIBarMetricsDefault];
+    
+     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:194.0f/255.0f green:235.0f/255.0f blue:255.0f/255.0f alpha:1.0f]];
+
     return YES;
 }
 

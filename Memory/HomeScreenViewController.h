@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
+#import "MyUser.h"
 
 @interface HomeScreenViewController : UIViewController
-
+//@property (strong, nonatomic) AVAudioPlayer *player;
 @property IBOutlet UIBarButtonItem *profileIconbtn;
 @property IBOutlet UILabel *homeName;
 @property NSString *userName;
++(int)flagSound;
++(void)setFlagSound:(int)myFlag;
+//- (void)saveUser:(MyUser *)user;
++(int)flagbkgndSound;
++(void)setFlagbkgndSound:(int)myFlag;
++(void)stopBGMusic;
++(void)startBGMusic;
+
 @end

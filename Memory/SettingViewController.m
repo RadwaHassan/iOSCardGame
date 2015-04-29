@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewController.h"
+#import "HomeScreenViewController.h"
 
 @interface SettingViewController ()
 
@@ -14,6 +15,7 @@
 
 @implementation SettingViewController
 @synthesize soundSwitch;
+@synthesize bkgndSoundSwitch;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,9 +28,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"radwa2.jpg"]]];
+
     // Do any additional setup after loading the view.
 }
 
+
+-(void)bckgndSoundSwitch:(id)sender{
+    if (soundSwitch.on) {
+        //sound enabled
+        printf("enabled");
+        [HomeScreenViewController startBGMusic];
+        
+    }else{
+        //sound disabled
+        [HomeScreenViewController stopBGMusic];
+       // [HomeScreenViewController setFlagbkgndSound:0];
+    }
+    printf("not here or here");
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -41,7 +60,7 @@
         
     }else{
         //sound disabled
-        printf("disabled");
+        [HomeScreenViewController setFlagSound:0 ];
     }
     printf("not here or here");
 }

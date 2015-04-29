@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
 @interface RankingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic, strong) IBOutlet UITableView *tableView2;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, strong)  NSMutableArray *names;
+@property(nonatomic, strong)  NSMutableArray *score;
+-(void)saveToPlist:(NSMutableArray*) rankingArray;
+-(NSMutableArray*)readFromPlist;
 //test
 @end

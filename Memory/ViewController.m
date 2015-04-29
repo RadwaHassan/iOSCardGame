@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "HomeScreenViewController.h"
 
 @interface ViewController (){
     NSString *backCard;
@@ -94,26 +95,20 @@ NSInteger firstIndex ;
     
     if (touchOK) {
         
-        //make sound effect on click
-        
-        //**** uncomment this part for xcode 5
-//        NSString *pathToMySound = [[NSBundle mainBundle] pathForResource:@"multimedia_button_click" ofType:@"mp3"];
-//        SystemSoundID soundID;
-//        AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL fileURLWithPath: pathToMySound]), &soundID);
-//        AudioServicesPlaySystemSound(soundID);
+        //Ringtone on click card
+        if ([HomeScreenViewController flagSound]==1 ) {
+            //**** comment this part for xcode 5
+            NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                       [[NSBundle mainBundle] resourcePath], @"multimedia_button_click"];
+            NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+            
+            _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                             error:nil];
+            _player.numberOfLoops = 0;
+            
+            [_player play];
+        }
 
-        
-        
-        //**** comment this part for xcode 5
-        NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
-                                   [[NSBundle mainBundle] resourcePath], @"multimedia_button_click"];
-        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-        
-        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
-                                                         error:nil];
-        _player.numberOfLoops = 0;
-        
-        [_player play];
         
         
     NSInteger index = [sender tag];
@@ -174,27 +169,19 @@ NSInteger firstIndex ;
             //the two buttons are matched
         else{
             
-            //make sound effect on click when matched
-            
-            //****uncomment this part for xcode 5
-            
-//            NSString *pathToMySound = [[NSBundle mainBundle] pathForResource:@"matched" ofType:@"mp3"];
-//            SystemSoundID soundID;
-//            AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL fileURLWithPath: pathToMySound]), &soundID);
-//            AudioServicesPlaySystemSound(soundID);
-//            
-            
-            
-            //**** comment this part for xcode 5
-            NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
-                                       [[NSBundle mainBundle] resourcePath], @"matched"];
-            NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-            
-            _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
-                                                             error:nil];
-            _player.numberOfLoops = 0;
-            
-            [_player play];
+            //Ringtone on matching 2 cards
+            if ([HomeScreenViewController flagSound]==1 ) {
+                //**** comment this part for xcode 5
+                NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                           [[NSBundle mainBundle] resourcePath], @"matched_tone"];
+                NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+                
+                _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                                 error:nil];
+                _player.numberOfLoops = 0;
+                
+                [_player play];
+            }
             touchOK=YES;
             
             cardMatchedCounter++;
@@ -213,6 +200,20 @@ NSInteger firstIndex ;
             //time is up
             if (cardMatchedCounter == 8) {
                 
+                //Ringtone on winning game
+                if ([HomeScreenViewController flagSound]==1 ) {
+                    //**** comment this part for xcode 5
+                    NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                               [[NSBundle mainBundle] resourcePath], @"win_tone"];
+                    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+                    
+                    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                                     error:nil];
+                    _player.numberOfLoops = 0;
+                    
+                    [_player play];
+                }
+                
                 UIAlertView *winAlert = [[UIAlertView alloc]
                                               initWithTitle:@"Excellent"
                                               message:@"You win"
@@ -220,7 +221,13 @@ NSInteger firstIndex ;
                                               cancelButtonTitle:@"Share your score"
                                               otherButtonTitles:@"Home",nil];
                 [winAlert show];
+                
                 [timer invalidate];
+                NSString *final=[NSString stringWithFormat:@"http://10.145.17.224:8084/IosCardGameServer/SetUserScore?name=%@&score=%ld",_userName,(long)score];
+                NSURL *url=[[NSURL alloc]initWithString:final];
+                NSMutableURLRequest *request=[[NSMutableURLRequest alloc]initWithURL:url];
+                NSURLConnection *connection=[[NSURLConnection alloc]initWithRequest:request delegate:self];
+                [connection start];
                 
             }
             
@@ -306,6 +313,20 @@ NSInteger firstIndex ;
     timerLabel.text = [NSString stringWithFormat:@"Time: %li",(long)seconds];
     scoreLable.text = [NSString stringWithFormat:@"Score: %li",(long)score];
     if(seconds == 60){
+        
+        //Ringtone on losing game
+        if ([HomeScreenViewController flagSound]==1 ) {
+            //**** comment this part for xcode 5
+            NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.mp3",
+                                       [[NSBundle mainBundle] resourcePath], @"lose_tone"];
+            NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+            
+            _player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
+                                                             error:nil];
+            _player.numberOfLoops = 0;
+            
+            [_player play];
+        }
         [timer invalidate];
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Time is up!" message:[NSString stringWithFormat:@"You scored %i points",score] delegate:self cancelButtonTitle:@"Play Again" otherButtonTitles:@"Home",nil];
@@ -382,6 +403,7 @@ NSInteger firstIndex ;
     [timer invalidate];
 
 }
+
 
 
 @end
